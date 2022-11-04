@@ -1,0 +1,2 @@
+ctrl + p - top search bar
+shift + delete - delete any line
