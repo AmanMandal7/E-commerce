@@ -89,12 +89,6 @@ exports.deleteProduct = catchAsyncErrors(async (req, res) => {
     if (!product) {
         return next(new ErrorHandler("Product not found!", 404));
     }
-    // if (!product) {
-    //     return res.status(500).json({
-    //         success: false,
-    //         message: "Product not found!"
-    //     })
-    // }
 
     await product.remove();
 
