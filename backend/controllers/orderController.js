@@ -19,3 +19,29 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
         order
     });
 });
+
+// Get Single order
+exports.getSingleOrder = catchAsyncErrors(async (req, res, next) => {
+
+    const order = await Order.findById(req.params.id).populate("user", "name email");
+
+    if (!order) {
+        return next(new ErrorHandler("Order does not found with this id", 404));
+    }
+
+    res.status(200).json({
+        success: true,
+        order
+    });
+});
+
+// Get Logged in user Orders
+exports.myOrders = catchAsyncErrors(async (req, res, next) => {
+
+    const orders = await Order.find({ user: req.user._id });
+
+    res.status(200).json({
+        success: true,
+        orders
+    });
+});
